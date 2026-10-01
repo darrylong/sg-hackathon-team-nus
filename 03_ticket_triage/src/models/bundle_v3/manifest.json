@@ -1,0 +1,263 @@
+{
+  "bundle_format": 1,
+  "run": "combined_v3",
+  "created": "2026-10-01T07:31:09+00:00",
+  "rows": "train",
+  "n_rows": 21000,
+  "build_seconds": 767.5,
+  "source_runs": {
+    "category": "baseline_lr",
+    "assigned_team": "E8b_team_stacker",
+    "sentiment": "E9_tree_selected",
+    "priority": "E5b_ordinal_char"
+  },
+  "components": {
+    "category": {
+      "file": "category.joblib",
+      "run": "baseline_lr"
+    },
+    "priority": {
+      "file": "priority.joblib",
+      "run": "E5b_ordinal_char"
+    },
+    "sentiment": {
+      "file": "sentiment.joblib",
+      "run": "E9_tree_selected"
+    },
+    "assigned_team": {
+      "file": "team_stacker.joblib",
+      "run": "E8b_team_stacker",
+      "kind": "hgb_stacker",
+      "stack_source_run": "combined_v2",
+      "inputs": {
+        "category": {
+          "file": "team_base_category.joblib",
+          "run": "baseline_lr"
+        },
+        "assigned_team": {
+          "file": "team_base_team.joblib",
+          "run": "E1_char_tfidf"
+        }
+      },
+      "features": "[raw P(category), raw P(team), one-hot product (PRODUCTS), one-hot channel (CHANNELS)]"
+    },
+    "correctness": {
+      "file": "correctness.joblib",
+      "features": "correctness.build_features on calibrated category/priority/team probabilities + product/channel"
+    }
+  },
+  "temperatures": {
+    "category": 0.737558050456942,
+    "priority": 0.7512029459070332,
+    "assigned_team": 1.1358318432610877,
+    "sentiment": 1.0330584926609185
+  },
+  "temperature_sources": {
+    "category": "outputs/runs/baseline_lr/calibration.json",
+    "priority": "outputs/runs/E5b_ordinal_char/calibration.json",
+    "assigned_team": "outputs/runs/E8b_team_stacker/calibration.json",
+    "sentiment": "outputs/runs/E9_tree_selected/calibration.json"
+  },
+  "temperature_refit_on_bundle_oof": {
+    "category": 0.7375580504569161,
+    "priority": 0.7512029459064588,
+    "assigned_team": 1.1358318432610672
+  },
+  "classes": {
+    "category": [
+      "Access",
+      "Billing",
+      "Firmware",
+      "Hardware",
+      "Networking",
+      "Security",
+      "Software",
+      "Storage"
+    ],
+    "priority": [
+      "P1",
+      "P2",
+      "P3",
+      "P4"
+    ],
+    "assigned_team": [
+      "Account-Admin",
+      "Billing-Ops",
+      "Network-Support",
+      "Security-Ops",
+      "Server-HW",
+      "Software-Support",
+      "Storage-Support"
+    ],
+    "sentiment": [
+      "Angry",
+      "Frustrated",
+      "Neutral",
+      "Positive"
+    ]
+  },
+  "products": [
+    "GreenLake",
+    "ProLiant DL380 Gen11",
+    "ProLiant DL360 Gen10",
+    "Synergy 480 Gen11",
+    "Alletra 6010",
+    "Nimble HF40",
+    "Aruba CX 6300",
+    "Aruba CX 8360",
+    "iLO 6"
+  ],
+  "known_products": [
+    "Alletra 6010",
+    "Aruba CX 6300",
+    "Aruba CX 8360",
+    "GreenLake",
+    "Nimble HF40",
+    "ProLiant DL360 Gen10",
+    "ProLiant DL380 Gen11",
+    "Synergy 480 Gen11",
+    "iLO 6"
+  ],
+  "channels": [
+    "email",
+    "portal",
+    "chat"
+  ],
+  "p1_threshold": 0.225,
+  "priority_rule": "P1 if calibrated P(P1) >= p1_threshold else argmax over P2..P4",
+  "cost_matrix": {
+    "misroute": {
+      "P1": 8.0,
+      "P2": 2.0,
+      "P3": 1.0,
+      "P4": 1.0
+    },
+    "abstain": {
+      "P1": 1.0,
+      "P2": 0.5,
+      "P3": 0.3,
+      "P4": 0.3
+    }
+  },
+  "max_abstain_rate": 0.15,
+  "policy": "f_expcost_pcorrect: savings = (1-p_correct)*E[misroute|prio] - E[abstain|prio]; abstain top floor(cap*N) by savings with savings > 0 (cap=None: abstain iff savings > 0)",
+  "guards": {
+    "min_body_chars": 20
+  },
+  "oof_checks": {
+    "baseline_lr/category": {
+      "source": "baseline_lr/oof_train.csv",
+      "max_abs_diff": 1.9908519277578307e-12,
+      "ok": true
+    },
+    "E5b_ordinal_char/priority": {
+      "source": "E5b_ordinal_char/oof_train.csv",
+      "max_abs_diff": 2.4711233059804272e-11,
+      "ok": true
+    },
+    "E1_char_tfidf/assigned_team": {
+      "source": "E1_char_tfidf/oof_train.csv",
+      "max_abs_diff": 5.055248331053974e-09,
+      "ok": true
+    },
+    "team_stacker/assigned_team": {
+      "source": "E8b_team_stacker/oof_train.csv",
+      "max_abs_diff": 1.1102230246251565e-16,
+      "ok": true
+    }
+  },
+  "val_metrics": {
+    "split": "VAL",
+    "n": 4500,
+    "source": "outputs/runs/combined_v3/metrics.json",
+    "macro_f1": {
+      "category": 0.8666863371581672,
+      "priority": 0.7673702166864736,
+      "assigned_team": 0.9053472012621059,
+      "sentiment": 0.8856804082139126
+    },
+    "P1_argmax": {
+      "precision": 0.7989276139410187,
+      "recall": 0.5983935742971888,
+      "f1": 0.6842709529276694
+    },
+    "escalation_argmax": {
+      "precision": 0.9393673110720563,
+      "recall": 0.7942050520059435,
+      "f1": 0.8607085346215781
+    },
+    "policy_f": {
+      "mean_cost": 0.14173333333333332,
+      "abstain_rate": 0.09466666666666666,
+      "n_abstain": 426
+    },
+    "policy_no_abstain_cost": 0.17666666666666667,
+    "team_error_auroc": {
+      "p_ok": 0.7454441172389337,
+      "p_correct": 0.7559931543810419
+    },
+    "priority_with_P1_threshold": {
+      "t": 0.225,
+      "priority_macro_f1": 0.770030344234677,
+      "P1_precision": 0.6584967320261438,
+      "P1_recall": 0.8092369477911646,
+      "P1_f1": 0.7261261261261261,
+      "escalation_f1": 0.8607085346215781,
+      "source": "outputs\\round2c\\p1_threshold\\options.csv"
+    }
+  },
+  "package_versions": {
+    "python": "3.12.1",
+    "numpy": "2.3.4",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.1",
+    "scipy": "1.16.1",
+    "joblib": "1.5.2",
+    "rapidfuzz": "3.14.0"
+  },
+  "selection": {
+    "sources": {
+      "category": "baseline_lr",
+      "assigned_team": "E8b_team_stacker",
+      "sentiment": "E9_tree_selected",
+      "priority": "E5b_ordinal_char"
+    },
+    "label_sources": null,
+    "team_rule": {
+      "i_cost_improves": true,
+      "i_team_f1_no_drop": true,
+      "ii_cost_within_slack": true,
+      "ii_team_f1_improves": false
+    }
+  },
+  "files": {
+    "category.joblib": {
+      "bytes": 2456595,
+      "sha256": "964f5497399ded3397634ed8e9cbc67172556225e4e0376c298d7ce65e58e28e"
+    },
+    "correctness.joblib": {
+      "bytes": 2163,
+      "sha256": "69140af0a8c9558f84fcde9838e864b9270dea7fa883dee5a799c5d51f1652ba"
+    },
+    "priority.joblib": {
+      "bytes": 2409799,
+      "sha256": "3da715a4285bb84a324abccd3d16f973cfcc9636f6fed72cdca74840316a7866"
+    },
+    "sentiment.joblib": {
+      "bytes": 2807720,
+      "sha256": "4228fac2b466253d624d12c13ec238a18145acae5023592ae06a92e6e28a3f87"
+    },
+    "team_base_category.joblib": {
+      "bytes": 2456595,
+      "sha256": "964f5497399ded3397634ed8e9cbc67172556225e4e0376c298d7ce65e58e28e"
+    },
+    "team_base_team.joblib": {
+      "bytes": 4568664,
+      "sha256": "1061fbe01f528778ba75be63610fbe6176cf122fc7a244c3fd5b0d70f0e548da"
+    },
+    "team_stacker.joblib": {
+      "bytes": 639176,
+      "sha256": "d8b42c8dc3b668a15e15d4b882fd8960af8bbe939a563dc98963455fa264f293"
+    }
+  }
+}

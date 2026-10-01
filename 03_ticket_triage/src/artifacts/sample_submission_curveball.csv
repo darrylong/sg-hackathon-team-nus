@@ -1,0 +1,3 @@
+ticket_id,category,priority,assigned_team,sentiment,abstain
+CB-001,Hardware,P2,Server-HW,Neutral,0
+CB-002,,P3,,Neutral,1

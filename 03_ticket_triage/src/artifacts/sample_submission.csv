@@ -1,0 +1,6 @@
+ticket_id,category,priority,assigned_team,sentiment,abstain
+TK-100001,Software,P1,Software-Support,Angry,0
+TK-100002,Access,P3,Account-Admin,Neutral,0
+TK-100003,Access,P2,Account-Admin,Angry,0
+TK-100004,Software,P2,Software-Support,Angry,0
+TK-100005,,P1,,Frustrated,1

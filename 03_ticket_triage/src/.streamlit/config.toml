@@ -1,0 +1,19 @@
+# HPE-style theme for app/frontend.py (read when Streamlit is started from 03_ticket_triage/, e.g. by start.py)
+[theme]
+base = "light"
+primaryColor = "#0072CE"
+backgroundColor = "#F7F7F7"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1A1A2E"
+font = "sans serif"
+borderColor = "#EEEEEE"
+dataframeBorderColor = "#EEEEEE"
+dataframeHeaderBackgroundColor = "#F2F2F2"
+buttonRadius = "6px"
+showSidebarBorder = true
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false

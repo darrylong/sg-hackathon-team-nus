@@ -1,0 +1,4 @@
+{
+  "max_abstain_rate": 0.15,
+  "meaning": "abstain=1 sends a ticket to the human triage desk; it can absorb at most this share of tickets. A submission that abstains on more than this share of the eval tickets is over capacity."
+}

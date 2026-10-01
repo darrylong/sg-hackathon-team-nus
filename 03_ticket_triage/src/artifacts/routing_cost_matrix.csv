@@ -1,0 +1,13 @@
+true_priority,outcome,cost
+P1,correct,0.0
+P1,misroute,8.0
+P1,abstain,1.0
+P2,correct,0.0
+P2,misroute,2.0
+P2,abstain,0.5
+P3,correct,0.0
+P3,misroute,1.0
+P3,abstain,0.3
+P4,correct,0.0
+P4,misroute,1.0
+P4,abstain,0.3

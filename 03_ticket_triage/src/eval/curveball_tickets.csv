@@ -1,0 +1,16 @@
+ticket_id,channel,subject,body,product
+CB-001,email,Thank you SO much,"Wow, what an achievement: the DL380 in our trading rack has now rebooted itself four times since your engineer swapped the system board yesterday. Truly inspiring stuff. It's our production pricing engine.",ProLiant DL380 Gen11
+CB-002,chat,it broke,it broke,GreenLake
+CB-003,email,server tak boleh boot,"Hi team, server DL360 kita tak boleh boot since pagi tadi, LED amber. Production database on it. Tolong check ASAP.",ProLiant DL360 Gen10
+CB-004,portal,server room aircon dead,"[Customer-selected severity: Critical] The aircon in our server room died about an hour ago, room is at 38C and the Synergy frame is screaming. Who do we call?",Synergy 480 Gen11
+CB-005,email,volume read-only,At 09:14 the payments volume on the Alletra went read-only. Card transactions are failing in all 140 stores. We have not touched anything.,Alletra 6010
+CB-006,email,URGENT!!!,URGENT: what's the part number for the front bezel of a DL360 Gen10? Need to order one for a lab box. Thanks!,ProLiant DL360 Gen10
+CB-007,email,AOS-CX upgrade failed,Upgrade of our CX 8360 core from 10.13.1000 to 10.14.1020 failed and the switch came back on the secondary image. Traffic is flowing but we are one reboot away from trouble.,Aruba CX 8360
+CB-008,email,SSO broken after cert rotation,"Since our Okta signing certificate rotated last night, SAML SSO into GreenLake fails for every admin. Third time this happens after a rotation. Please fix the trust config.",GreenLake
+CB-009,email,great news + a question,"Great news - the fix from last week worked, love it, thanks a lot! One small question: why does invoice INV-0048812 list two support SKUs? No rush.",GreenLake
+CB-010,email,logical drive failed,Smart Array on DL380 host db07 reports logical drive 1 FAILED after a power blip; Windows won't boot. It's our staging SQL box.,ProLiant DL380 Gen11
+CB-011,email,Paketverlust im Core,"Hallo zusammen, seit dem Wartungsfenster verliert der CX 6300 im VLAN 210 etwa 30% der Pakete. Das ist unser Produktivnetz, alle Filialen sind betroffen. Das ist inakzeptabel.",Aruba CX 6300
+CB-012,portal,can't see invoices,"[Customer-selected severity: Medium] Our finance lead was added to GreenLake but sees an empty billing page, so she can't download invoices. Can you give her the billing viewer role?",GreenLake
+CB-013,email,THIRD TIME,THIRD TIME I AM WRITING. HALF OUR OFFICE HAS NO NETWORK SINCE MONDAY AND NOBODY HAS CALLED BACK. DO YOUR JOB.,Aruba CX 6300
+CB-014,chat,vlan,"teh vlan 20 isnt pasing trafic sinc upgrde, only few ppl affected, pls chek",Aruba CX 6300
+CB-015,chat,again,"same thing as before, it's doing it again",Nimble HF40
